@@ -29,6 +29,7 @@ contract celoHousing {
         string location;
         uint price;
         bool isForsale;
+        uint likes;
     }
        
 
@@ -51,7 +52,8 @@ contract celoHousing {
             _description,
             _location,
             _price,
-            true
+            true,
+            0
         );
        
         propertiesLength++;
@@ -67,7 +69,8 @@ contract celoHousing {
         string memory,
         string memory,
         uint,
-        bool
+        bool,
+        uint
     ) {
         return (
             properties[_index].owner,
@@ -75,7 +78,8 @@ contract celoHousing {
             properties[_index].description,
             properties[_index].location,
             properties[_index].price,
-            properties[_index].isForsale
+            properties[_index].isForsale,
+            properties[_index].likes
         );
     }
     // setting the property for sale and adding a check to make sure only the owner can make a product for sale
@@ -89,6 +93,11 @@ contract celoHousing {
         properties[_index].price = _price;
     }
 
+    function likeProperty(uint _index) public {
+        require(msg.sender != properties[_index].owner, "Owner of property cant like property");
+        properties[_index].likes++;
+    }
+
 // editing the details of the property and making sure only the owner of the property can edit it and also making sure the location cannot be change
     function editProperty(
         uint256 _index,
@@ -99,13 +108,15 @@ contract celoHousing {
         string memory _location = properties[_index].location;
         uint _price = properties[_index].price;
         bool _isForsale = properties[_index].isForsale;
+        uint likes = properties[_index].likes;
         properties[_index] = Property(
             payable(msg.sender),
             _url,
             _description,
             _location,
             _price,
-            _isForsale
+            _isForsale,
+            likes
         );
     }
 
