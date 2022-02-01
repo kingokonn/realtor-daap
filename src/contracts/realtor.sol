@@ -29,6 +29,7 @@ contract celoHousing {
         string location;
         uint price;
         bool isForsale;
+        uint likes;
     }
        
 
@@ -44,6 +45,7 @@ contract celoHousing {
         string memory _location,
         uint _price
     ) public {
+        uint _likes = 0;
         
         properties[propertiesLength] = Property(
             payable(msg.sender),
@@ -51,7 +53,8 @@ contract celoHousing {
             _description,
             _location,
             _price,
-            true
+            true,
+            _likes
         );
        
         propertiesLength++;
@@ -67,7 +70,8 @@ contract celoHousing {
         string memory,
         string memory,
         uint,
-        bool
+        bool,
+        uint
     ) {
         return (
             properties[_index].owner,
@@ -75,9 +79,19 @@ contract celoHousing {
             properties[_index].description,
             properties[_index].location,
             properties[_index].price,
-            properties[_index].isForsale
+            properties[_index].isForsale,
+            properties[_index].likes
         );
     }
+
+
+// liking property and making sure owner cannot like their own property
+    function likeProperty(uint _index) public {
+        require(msg.sender != properties[_index].owner, "Owner of property cant like property");
+        properties[_index].likes++;
+    }
+
+
     // setting the property for sale and adding a check to make sure only the owner can make a product for sale
     function setForsale(uint _index) public{
         require(msg.sender == properties[_index].owner, "Only the owner of this property can run this operation");
@@ -99,13 +113,15 @@ contract celoHousing {
         string memory _location = properties[_index].location;
         uint _price = properties[_index].price;
         bool _isForsale = properties[_index].isForsale;
+        uint _likes = properties[_index].likes;
         properties[_index] = Property(
             payable(msg.sender),
             _url,
             _description,
             _location,
             _price,
-            _isForsale
+            _isForsale,
+            _likes
         );
     }
 
