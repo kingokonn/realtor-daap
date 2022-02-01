@@ -4,7 +4,7 @@ Realtor is a daap that runs on the celo blockchain, users can showcase their rea
 
 # Live Demo
 
-https://upbeat-liskov-9883fd.netlify.app/
+https://silly-nobel-d7fa9e.netlify.app/
 
 
 # Getting Started with Create React App
