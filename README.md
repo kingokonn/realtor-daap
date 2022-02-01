@@ -1,3 +1,12 @@
+Realtor is a daap that runs on the celo blockchain, users can showcase their real-estate properties for other users to buy and the ownership of the property will be transferred to the buyer after successful transaction. The owner of the property can choose to either set the property for sale or not for sale, they can also change the price of the property.
+
+
+
+# Live Demo
+
+https://upbeat-liskov-9883fd.netlify.app/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
