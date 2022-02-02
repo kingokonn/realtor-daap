@@ -90,6 +90,7 @@ contract celoHousing {
         require(msg.sender != properties[_index].owner, "Owner of property cant like property");
         properties[_index].likes++;
     }
+    
 
 
     // setting the property for sale and adding a check to make sure only the owner can make a product for sale
@@ -98,7 +99,7 @@ contract celoHousing {
         properties[_index].isForsale = !properties[_index].isForsale;
     }
 // changing the price of the property and making sure only the owner of the property can change the price
-    function modifyPrice(uint _index, uint _price) public {
+    function changePrice(uint _index, uint _price) public {
         require(msg.sender == properties[_index].owner, "Only the owner of this property can run this operation");
         properties[_index].price = _price;
     }
@@ -109,7 +110,7 @@ contract celoHousing {
         string memory _url,
         string memory _description 
     ) public {
-        require(msg.sender == properties[_index].owner, "Only owner can edit the property");
+        require(msg.sender == properties[_index].owner, "Only owner can edit the property");// making sure only the owner of the property can edit the property
         string memory _location = properties[_index].location;
         uint _price = properties[_index].price;
         bool _isForsale = properties[_index].isForsale;
