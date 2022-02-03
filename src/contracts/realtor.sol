@@ -16,7 +16,6 @@ interface IERC20Token {
 
 
 contract celoHousing {
- 
     address internal cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 
 
@@ -91,7 +90,7 @@ contract celoHousing {
         properties[_index].likes++;
     }
     
-
+ 
 
     // setting the property for sale and adding a check to make sure only the owner can make a product for sale
     function setForsale(uint _index) public{
@@ -141,6 +140,20 @@ contract celoHousing {
           "Transfer failed."
         );
         properties[_index].owner = payable(msg.sender); // transfer of ownership of the property
+    }
+
+
+
+    /* this function calculate the appreciation of a
+     property in a given ammount of years assuming 
+     the annual appreciation rate is 50% 
+     */
+    function PropertyAppreciationCalculator(uint _numberOfyears, uint _initialWorth) public pure returns(uint) {
+        uint appreciationValue = _initialWorth * 50;  // multiplying the initial worth by 50
+        uint percentageIncrease = appreciationValue / 100; // dividing the appreciation value by 100 to get the actual 50 percent value increase
+        uint v = percentageIncrease * _numberOfyears; // multiplying the gotten value with the number of years
+        uint result = v + _initialWorth; // adding the percentage increase value to the initial worth to get the total worth in the given ammount of years
+        return(result);
     }
 
     // return length of total properties
